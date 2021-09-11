@@ -72,13 +72,14 @@ public class Jmart
     }
     //Method getAdminFee
     public static int getAdminFee(int price){
-        int comission;
+        float comission;
         if(price == 0){
             return 0;
         }
         else{
             comission = (price * 5) / 100;
-            return comission;
+            int finalComission = (int) comission;
+            return finalComission;
         }
     }
 }
