@@ -9,27 +9,70 @@ package MuhammadRaihanWijayaJmartMR;
  */
 public class Jmart
 {
-    // instance variables - replace the example below with your own
-    private int x;
-
-    /**
-     * Constructor for objects of class Jmart
-     */
-    public Jmart()
-    {
-        // initialise instance variables
-        x = 0;
+    public static void main(String[] args){
+        
     }
-
-    /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
-     */
-    public int sampleMethod(int y)
-    {
-        // put your code here
-        return x + y;
+    //Method getPromo
+    public static void getPromo(){
+        return 0;
+    }
+    //Method getCustomer
+    public static String getCustomer(){
+        return "oop";
+    }
+    //Method getDiscountPercentage
+    public static float getDiscountPercentage(int before, int after){
+        if(before < after){
+            return 0;//no discount
+        }
+        else{
+            return 0.0f;
+        }
+    }
+    //Method getDiscountedPrice
+    public static int getDiscountedPrice(int price, float discountPercentage){
+        if(discountPercentage >= 100.0f){
+            return 0;
+        }
+        else if(price == 0){
+            return 0;
+        }
+        else{
+            price = price - ((price * discountPercentage) / 100);
+        }                
+    }
+    //Method getOriginalPrice
+    public static int getOriginalPrice(int discountedPrice, float discountPercentage){
+        int originalPrice;
+        if(discountPercentage <= 0){
+            return 0;
+        }
+        else{
+            originalPrice = discountedPrice / (1 - discountPercentage);
+            return originalPrice;
+        }
+    }
+    //Method getCommissionMultiplier
+    public static float getCommissionMultiplier(){
+        return 0.05f;
+    }
+    //Method getAdjustedPrice
+    public static int getAdjustedPrice(int price){
+        if(price == 0){
+            return 0;
+        }
+        else{
+            price = price + ((price * 5) / 100);
+        }
+    }
+    //Method getAdminFee
+    public static int getAdminFee(int price){
+        int komisi;
+        if(price == 0){
+            return 0;
+        }
+        else{
+            komisi = (price * 5) / 100;
+        }
     }
 }
