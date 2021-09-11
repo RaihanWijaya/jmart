@@ -30,7 +30,7 @@ public class Jmart
         }
     }
     //Method getDiscountedPrice
-    public static int getDiscountedPrice(int price, float discountPercentage){
+    public static int getDiscountedPrice(int price, float discountPercentage){ 
         if(discountPercentage >= 100.0f){
             return 0;
         }
@@ -38,8 +38,9 @@ public class Jmart
             return 0;
         }
         else{
-            int tempDiscount = (int) discountPercentage;
-            price = price - ((price * tempDiscount) / 100);
+            float tempPrice = price;
+            tempPrice = tempPrice - ((tempPrice * discountPercentage) / 100);
+            price = (int) tempPrice;
             return price;
         }
     }
