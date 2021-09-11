@@ -13,7 +13,7 @@ public class Jmart
         
     }
     //Method getPromo
-    public static void getPromo(){
+    public static int getPromo(){
         return 0;
     }
     //Method getCustomer
@@ -38,18 +38,22 @@ public class Jmart
             return 0;
         }
         else{
-            price = price - ((price * discountPercentage) / 100);
-        }                
+            int tempDiscount = (int) discountPercentage;
+            price = price - ((price * tempDiscount) / 100);
+            return price;
+        }
     }
     //Method getOriginalPrice
     public static int getOriginalPrice(int discountedPrice, float discountPercentage){
-        int originalPrice;
+        double tempPrice = discountedPrice, tempDiscount = discountPercentage, originalPrice;
+        
         if(discountPercentage <= 0){
             return 0;
         }
         else{
-            originalPrice = discountedPrice / (1 - discountPercentage);
-            return originalPrice;
+            originalPrice = tempPrice / (1 - tempDiscount);
+            int finalPrice = (int) originalPrice;
+            return finalPrice;
         }
     }
     //Method getCommissionMultiplier
@@ -63,16 +67,18 @@ public class Jmart
         }
         else{
             price = price + ((price * 5) / 100);
+            return price;
         }
     }
     //Method getAdminFee
     public static int getAdminFee(int price){
-        int komisi;
+        int comission;
         if(price == 0){
             return 0;
         }
         else{
-            komisi = (price * 5) / 100;
+            comission = (price * 5) / 100;
+            return comission;
         }
     }
 }
