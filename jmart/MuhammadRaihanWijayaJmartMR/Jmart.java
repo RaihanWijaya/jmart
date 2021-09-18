@@ -1,14 +1,17 @@
 package MuhammadRaihanWijayaJmartMR;
 
-
-/**
- * Write a description of class Jmart here.
- *
- * @author (your name)
- * @version (a version number or a date)
- */
 public class Jmart
 {
+    public static void main(String[] args){
+        //Code call function
+    }
+    
+    public static Product create(){
+        //PriceTag harga = new PriceTag(700);
+        Product LaptopHP = new Product("Laptop HP", 3, false, new PriceTag(700), ProductCategory.GAMING);
+        return null;
+    }
+    /*
     public static void main(String[] args){
         //Code call function
     }
@@ -80,5 +83,5 @@ public class Jmart
             int finalComission = (int) comission;
             return finalComission;
         }
-    }
+    }*/
 }
