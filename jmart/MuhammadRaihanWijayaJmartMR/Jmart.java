@@ -12,6 +12,7 @@ public class Jmart
         return null;
     }
     /*
+     * Ini untuk CS Modul 1
     public static void main(String[] args){
         //Code call function
     }
