@@ -26,7 +26,7 @@ public class Jmart
             return 0;//no discount
         }
         else{
-            return 100.0f * cut / before;
+            return 100.0f * (before - after) / before;
         }
     }
     //Method getDiscountedPrice
@@ -52,8 +52,6 @@ public class Jmart
             return 0;
         }
         else{
-            originalPrice = tempPrice / (1 - discountPercentage);
-            int finalPrice = (int) originalPrice;
             return (int) (100 * discountedPrice / divider);
         }
     }
