@@ -10,7 +10,7 @@ package MuhammadRaihanWijayaJmartMR;
 public class Jmart
 {
     public static void main(String[] args){
-        
+        //Code call function
     }
     //Method getPromo
     public static int getPromo(){
@@ -26,7 +26,7 @@ public class Jmart
             return 0;//no discount
         }
         else{
-            return 0.0f;
+            return 100.0f * cut / before;
         }
     }
     //Method getDiscountedPrice
@@ -46,15 +46,15 @@ public class Jmart
     }
     //Method getOriginalPrice
     public static int getOriginalPrice(int discountedPrice, float discountPercentage){
-        double tempPrice = discountedPrice, tempDiscount = discountPercentage, originalPrice;
+        float divider = 100.0f - discountPercentage;
         
         if(discountPercentage <= 0){
             return 0;
         }
         else{
-            originalPrice = tempPrice / (1 - tempDiscount);
+            originalPrice = tempPrice / (1 - discountPercentage);
             int finalPrice = (int) originalPrice;
-            return finalPrice;
+            return (int) (100 * discountedPrice / divider);
         }
     }
     //Method getCommissionMultiplier
