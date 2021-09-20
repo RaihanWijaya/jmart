@@ -6,16 +6,27 @@ public class Jmart
         //Code call function
     }
     
+    public static Product createProduct(){
+        return null;
+    }
+    
+    public static Coupon createCoupon(){
+        return null;
+    }
+    
+    public static ShipmentDuration createShipmentDuration(){
+        return null;
+    }
+    
     public static Product create(){
         //PriceTag harga = new PriceTag(700);
         Product LaptopHP = new Product("Laptop HP", 3, false, new PriceTag(700), ProductCategory.GAMING);
         return null;
     }
+    //====================================================================
     /*
      * Ini untuk CS Modul 1
-    public static void main(String[] args){
-        //Code call function
-    }
+    
     //Method getPromo
     public static int getPromo(){
         return 0;

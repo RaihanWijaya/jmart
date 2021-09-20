@@ -20,15 +20,15 @@ public class PriceTag
     }
     
     public double getAdjustedPrice(){
-        return (double) getDiscountedPrice() + getAdminFee();
+        return getDiscountedPrice() + getAdminFee();
     }
     
     public double getAdminFee(){       
         if(getDiscountedPrice() < BOTTOM_PRICE){
-            return (double) BOTTOM_FEE;
+            return BOTTOM_FEE;
         }
         else{
-            return (double) getDiscountedPrice() - (price * COMMISSION_MULTIPLIER);
+            return getDiscountedPrice() - (price * COMMISSION_MULTIPLIER);
         }
     }
     
@@ -37,7 +37,7 @@ public class PriceTag
             return 0.0;
         }
         else{
-            return (double) ((100.0 - discount) * price) / 100;
+            return ((100.0 - discount) * price) / 100;
         }
     }
 }
