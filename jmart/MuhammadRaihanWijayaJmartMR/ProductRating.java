@@ -16,12 +16,12 @@ public class ProductRating
     }
     
     public double getAverage(){
-        if(count <= 0){
+        if (count <= 0){
             System.out.println("Please add rating");
             return 0;
         }
         else{
-            return (double) total / count;
+            return total / count;
         }
     }
     

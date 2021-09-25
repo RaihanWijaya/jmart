@@ -19,8 +19,6 @@ public class Jmart
     }
     
     public static Product create(){
-        //PriceTag harga = new PriceTag(700);
-        Product LaptopHP = new Product("Laptop HP", 3, false, new PriceTag(700), ProductCategory.GAMING);
         return null;
     }
     //====================================================================

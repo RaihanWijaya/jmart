@@ -27,7 +27,7 @@ public class Coupon
     }
     
     public boolean canApply(PriceTag priceTag){
-        if(priceTag.getAdjustedPrice() >= minimum && used == false){
+        if (priceTag.getAdjustedPrice() >= minimum && used == false){
             return true;
         }
         else{
@@ -40,13 +40,10 @@ public class Coupon
         this.used = true;
         switch (type){
             case DISCOUNT:
-                System.out.println(priceTag.discount);
-                break;
+                return (priceTag.getAdjustedPrice() * ((100 - cut) / 100));
                 
-            case REBATE:
-                System.out.println((tempPrice * priceTag.discount) / 100);
-                break;
+            default:
+                return (priceTag.getAdjustedPrice() - cut);
         }
-        return tempPrice - ((tempPrice * priceTag.discount) / 100);
     }
 }
