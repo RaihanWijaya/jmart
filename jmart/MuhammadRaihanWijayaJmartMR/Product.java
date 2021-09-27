@@ -27,6 +27,6 @@ public class Product extends Recognizable implements FileParser
     }
     
     public String toString(){
-        return this.name + this.weight + this.conditionUsed + this.priceTag + this.category + this.rating + this.storeId;
+        return this.name + this.weight + this.conditionUsed + this.priceTag + this.category + this.rating.getAverage() + this.storeId;
     }
 }
