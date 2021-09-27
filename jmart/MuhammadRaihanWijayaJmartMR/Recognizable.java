@@ -1,6 +1,6 @@
 package MuhammadRaihanWijayaJmartMR;
 
-public class Recognizable
+public abstract class Recognizable
 {
     public int id;
     

@@ -6,8 +6,8 @@ public class ProductRating
     private static long count;
     
     public ProductRating(){
-        this.total = 0;
-        this.count = 0;
+        ProductRating.total = 0;
+        ProductRating.count = 0;
     }
     
     public void insert(int rating){

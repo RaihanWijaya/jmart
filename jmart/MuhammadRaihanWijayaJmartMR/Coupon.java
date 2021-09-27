@@ -1,6 +1,6 @@
 package MuhammadRaihanWijayaJmartMR;
 
-public class Coupon
+public class Coupon extends Recognizable implements FileParser
 {
     public static enum Type{
         DISCOUNT,
@@ -12,14 +12,14 @@ public class Coupon
     public final Type type;
     private boolean used;
 
-    public Coupon(String name, int code, Type type, double cut, double minimum)
-    {
+    public Coupon(int id, String name, int code, Type type, double cut, double minimum){
+        super(id);
         this.name = name;
         this.code = code;
-        this.type = type;
         this.cut = cut;
+        this.type = type;
         this.minimum = minimum;
-        this.used = false;
+        used = false;
     }
 
     public boolean isUsed(){
@@ -36,7 +36,6 @@ public class Coupon
     }
     
     public double apply(PriceTag priceTag){
-        double tempPrice = priceTag.getAdjustedPrice();
         this.used = true;
         switch (type){
             case DISCOUNT:
@@ -45,5 +44,10 @@ public class Coupon
             default:
                 return (priceTag.getAdjustedPrice() - cut);
         }
+    }
+    
+    @Override
+    public boolean read(String content){
+        return false;
     }
 }

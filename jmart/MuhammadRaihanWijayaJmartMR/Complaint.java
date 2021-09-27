@@ -1,24 +1,14 @@
-/*package MuhammadRaihanWijayaJmartMR;
+package MuhammadRaihanWijayaJmartMR;
 
-public class Complaint extends Transaction implements FileParser
+public class Complaint extends Recognizable implements FileParser
 {
-    public int paymentId;
+    public String date;
     public String desc;
     
-    public Complaint(int id, Payment payment, String desc){
-        //belum
-    }
-    
-    public Complaint(int id, int buyerId, int storeId, int paymentId, String desc){
-        //belum
-    }
-    
-    public boolean validate(){
-        return false;
-    }
-    
-    public Transaction perform(){
-        return null;
+    public Complaint(int id, String desc){
+        super(id);
+        this.desc = desc;
+        date = "PostTest";
     }
     
     @Override
@@ -26,4 +16,3 @@ public class Complaint extends Transaction implements FileParser
         return false;
     }
 }
-*/
