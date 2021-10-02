@@ -1,14 +1,16 @@
 package MuhammadRaihanWijayaJmartMR;
 
+import java.util.Date;
+
 public class Complaint extends Recognizable implements FileParser
 {
-    public String date;
+    public Date date;
     public String desc;
     
     public Complaint(int id, String desc){
         super(id);
         this.desc = desc;
-        date = "PostTest";
+        this.date = new Date();
     }
     
     @Override

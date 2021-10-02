@@ -18,9 +18,9 @@ public abstract class Recognizable
         return false;
     }
     
-    //Masih ragu-ragu
     public boolean equals(Recognizable recognize){
-        if (this.id == recognize.id){
+        if (
+        id == recognize.id){
             return true;
         }
         else{

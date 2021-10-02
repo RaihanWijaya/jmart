@@ -2,7 +2,7 @@ package MuhammadRaihanWijayaJmartMR;
 
 public interface Transactor
 {
-    public boolean validate();
+    public abstract boolean validate();
     
-    public Invoice perform();
+    public abstract Invoice perform();
 }

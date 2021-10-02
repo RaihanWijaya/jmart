@@ -5,22 +5,6 @@ public class Jmart
     public static void main(String[] args){
         //Code call function
     }
-    
-    public static Product createProduct(){
-        return null;
-    }
-    
-    public static Coupon createCoupon(){
-        return null;
-    }
-    
-    public static Shipment createShipmentDuration(){
-        return null;
-    }
-    
-    public static Product create(){
-        return null;
-    }
     //====================================================================
     /*
      * Ini untuk CS Modul 1
