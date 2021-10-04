@@ -1,9 +1,13 @@
 package MuhammadRaihanWijayaJmartMR;
-
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-
+/**
+ * Class for Shipment
+ *
+ * @author Raihan Wijaya
+ * @version v1.0 in Modul 4
+ */
 public class Shipment implements FileParser
 {
     public String address;

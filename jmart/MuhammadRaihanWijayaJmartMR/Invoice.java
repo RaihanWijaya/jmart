@@ -1,8 +1,12 @@
 package MuhammadRaihanWijayaJmartMR;
-
 import java.util.Date;
 import java.util.ArrayList;
-
+/**
+ * Class for Invoice
+ *
+ * @author Raihan Wijaya
+ * @version v1.0 in Modul 4
+ */
 public abstract class Invoice extends Recognizable implements FileParser
 {
     public Date date;

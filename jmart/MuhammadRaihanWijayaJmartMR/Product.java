@@ -1,5 +1,10 @@
 package MuhammadRaihanWijayaJmartMR;
-
+/**
+ * Class for Product
+ *
+ * @author Raihan Wijaya
+ * @version v1.0 in Modul 4
+ */
 public class Product extends Recognizable implements FileParser
 {
     public int storeId;

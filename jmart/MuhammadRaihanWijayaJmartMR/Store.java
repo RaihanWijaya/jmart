@@ -1,8 +1,12 @@
 package MuhammadRaihanWijayaJmartMR;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
+/**
+ * Class for Store
+ *
+ * @author Raihan Wijaya
+ * @version v1.0 in Modul 4
+ */
 public class Store extends Recognizable implements FileParser
 {
     public static final String REGEX_PHONE = "^(\\d{9,12})$", REGEX_NAME = "^(?=^[A-Z])(?![A-Z a-z]{20,})((?=[A-Z a-z]{4,}).)((?!\\s{2}).)*$";

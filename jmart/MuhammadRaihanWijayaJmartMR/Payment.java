@@ -1,5 +1,10 @@
 package MuhammadRaihanWijayaJmartMR;
-
+/**
+ * Class for Payment
+ *
+ * @author Raihan Wijaya
+ * @version v1.0 in Modul 4
+ */
 public class Payment extends Invoice implements Transactor
 {
     public Shipment shipment;

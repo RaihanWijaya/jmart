@@ -1,7 +1,11 @@
 package MuhammadRaihanWijayaJmartMR;
-
 import java.util.ArrayList;
-
+/**
+ * Class for Filter
+ *
+ * @author Raihan Wijaya
+ * @version v1.0 in Modul 4
+ */
 public class Filter
 {
     public static ArrayList<PriceTag> filterPriceTag(PriceTag[] list, double value, boolean less){

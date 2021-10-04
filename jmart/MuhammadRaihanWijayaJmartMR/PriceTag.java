@@ -1,5 +1,10 @@
 package MuhammadRaihanWijayaJmartMR;
-
+/**
+ * Class for PriceTag
+ *
+ * @author Raihan Wijaya
+ * @version v1.0 in Modul 4
+ */
 public class PriceTag
 {
     public static final double COMMISSION_MULTIPLIER = 0.05;

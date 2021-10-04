@@ -1,8 +1,12 @@
 package MuhammadRaihanWijayaJmartMR;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
+/**
+ * Class for Account
+ *
+ * @author Raihan Wijaya
+ * @version v1.0 in Modul 4
+ */
 public class Account extends Recognizable implements FileParser
 {
     public static final String REGEX_EMAIL = "^\\w+([.&`~-]?\\w+)*@\\w+([.-]?\\w+)+$", REGEX_PASSWORD = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d][^-\\s]{8,}$";

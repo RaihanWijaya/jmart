@@ -1,8 +1,12 @@
 package MuhammadRaihanWijayaJmartMR;
-
 import java.util.Date;
 import java.text.SimpleDateFormat;
-
+/**
+ * Class for Complaint
+ *
+ * @author Raihan Wijaya
+ * @version v1.0 in Modul 4
+ */
 public class Complaint extends Recognizable implements FileParser
 {
     public Date date;

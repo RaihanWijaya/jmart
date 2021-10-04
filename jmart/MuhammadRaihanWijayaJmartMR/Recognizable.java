@@ -1,5 +1,10 @@
 package MuhammadRaihanWijayaJmartMR;
-
+/**
+ * Class for Recognizable
+ *
+ * @author Raihan Wijaya
+ * @version v1.0 in Modul 4
+ */
 public abstract class Recognizable
 {
     public int id;

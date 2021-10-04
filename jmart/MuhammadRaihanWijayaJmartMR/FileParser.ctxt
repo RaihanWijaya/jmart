@@ -1,5 +1,6 @@
 #BlueJ class context
 comment0.target=FileParser
+comment0.text=\r\n\ Class\ for\ File\ Parser\r\n\r\n\ @author\ Raihan\ Wijaya\r\n\ @version\ v1.0\ in\ Modul\ 4\r\n
 comment1.params=content
 comment1.target=boolean\ read(java.lang.String)
 comment2.params=
