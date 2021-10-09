@@ -5,31 +5,37 @@ package MuhammadRaihanWijayaJmartMR;
  * @author Raihan Wijaya
  * @version v1.0 in Modul 4
  */
-public abstract class Recognizable
+public abstract class Recognizable implements Comparable<Recognizable>
 {
-    public int id;
+    public final int id;
     
     protected Recognizable(int id){
         this.id = id;
     }
-    
-    public boolean equals(Object objek){
-        if (objek instanceof Recognizable){
-            Recognizable upcasting = (Recognizable)objek;
-            if (upcasting.id == id){
-                return true;
-            }
-        }
-        return false;
+
+    public static int setClosingId(Class<Recognizable>clazz, int id){
+        return 0;
+    }
+
+    public static int getClosingId(Class<Recognizable>clazz){
+        return 0;
+    }
+
+    public boolean equals(Object other){
+        return other instanceof Recognizable && ((Recognizable) other).id == id;
     }
     
-    public boolean equals(Recognizable recognize){
-        if (
-        id == recognize.id){
-            return true;
+    public boolean equals(Recognizable other){
+        return other.id == id;
+    }
+
+    @Override
+    public int compareTo(Recognizable other) {
+        if (id == other.id){
+            return 1;
         }
         else{
-            return false;
+            return 0;
         }
     }
 }

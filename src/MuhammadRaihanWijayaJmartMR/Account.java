@@ -23,7 +23,11 @@ public class Account extends Recognizable implements FileParser
     public boolean read(String content){
         return false;
     }
-    
+
+    public Object write() {
+        return FileParser.super.write();
+    }
+
     public String toString(){
         return this.name + this.email + this.password;
     }
