@@ -4,35 +4,31 @@ import java.util.regex.Pattern;
 /**
  * Class for Store
  *
- * @author Raihan Wijaya
+ * @author Muhammad Raihan Wijaya
  * @version v1.0 in Modul 4
  */
-public class Store extends Recognizable implements FileParser
+public class Store extends Recognizable
 {
-    public static final String REGEX_PHONE = "^(\\d{9,12})$", REGEX_NAME = "^(?=^[A-Z])(?![A-Z a-z]{20,})((?=[A-Z a-z]{4,}).)((?!\\s{2}).)*$";
-    public String name, address, phoneNumber;
+    public static final String REGEX_NAME = "^[A-Z](?!.*(\\s)\\1).{4,20}$";
+    public static final String REGEX_PHONE = "^(\\d{9,12})$";
+    public double balance;
+    public String address, name, phoneNumber;
     
-    public Store(int accountId, String name, String address, String phoneNumber){
-        super(accountId);
+    public Store(String name, String address, String phoneNumber, double balance){
         this.name = name;
         this.address = address;
         this.phoneNumber = phoneNumber;
+        this.balance = balance;
     }
     
     public Store(Account account, String name, String address, String phoneNumber){
-        super(account.id);
         this.name = name;
         this.address = address;
         this.phoneNumber = phoneNumber;
     }
     
-    @Override
-    public boolean read(String content){
-        return false;
-    }
-    
     public String toString(){
-        return this.name + this.address + this.phoneNumber;
+        return this.name + this.address + this.phoneNumber + this.balance;
     }
 
     public boolean validate(){

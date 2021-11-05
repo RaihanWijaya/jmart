@@ -2,7 +2,7 @@ package MuhammadRaihanWijayaJmartMR;
 /**
  * Class for Product Rating
  * 
- * @author Raihan Wijaya
+ * @author Muhammad Raihan Wijaya
  * @version v1.0 in Modul 4
  */
 public class ProductRating
@@ -14,12 +14,7 @@ public class ProductRating
         ProductRating.total = 0;
         ProductRating.count = 0;
     }
-    
-    public void insert(int rating){
-        total += rating;
-        count++;
-    }
-    
+
     public double getAverage(){
         if (count <= 0){
             System.out.println("Please add rating");
@@ -36,5 +31,10 @@ public class ProductRating
     
     public long getTotal(){
         return total;
+    }
+
+    public void insert(int rating){
+        total += rating;
+        count++;
     }
 }

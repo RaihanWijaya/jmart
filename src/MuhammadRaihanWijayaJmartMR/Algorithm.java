@@ -370,6 +370,5 @@ public class Algorithm<T> {
         }
 
         return minimum;
-
     }
 }

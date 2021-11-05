@@ -2,36 +2,32 @@ package MuhammadRaihanWijayaJmartMR;
 /**
  * Class for Product
  *
- * @author Raihan Wijaya
+ * @author Muhammad Raihan Wijaya
  * @version v1.0 in Modul 4
  */
-public class Product extends Recognizable implements FileParser
+public class Product extends Recognizable
 {
-    public int storeId;
-    public String name;
-    public int weight;
-    public boolean conditionUsed;
-    public PriceTag priceTag;
+    public int accountId;
     public ProductCategory category;
-    public ProductRating rating;
-    public Shipment.MultiDuration multiDuration;
+    public boolean conditionUsed;
+    public double discount;
+    public String name;
+    public double price;
+    public byte shipmentPlans;
+    public int weight;
 
-    public Product(int id, int storeId, String name, int weight, boolean conditionUsed, PriceTag priceTag, ProductCategory category, Shipment.MultiDuration multiDuration) {
-        super(id);
+    public Product(int accountId, String name, int weight, boolean conditionUsed, double price, double discount, ProductCategory category, byte shipmentPlans) {
+        this.accountId = accountId;
         this.name = name;
         this.weight = weight;
         this.conditionUsed = conditionUsed;
-        this.priceTag = priceTag;
+        this.price = price;
+        this.discount = discount;
         this.category = category;
-        this.multiDuration = multiDuration;
+        this.shipmentPlans = shipmentPlans;
     }
-    
-    @Override
-    public boolean read(String content){
-        return false;
-    }
-    
+
     public String toString(){
-        return this.name + this.weight + this.conditionUsed + this.priceTag + this.category + this.rating.getAverage() + this.storeId;
+        return this.accountId + this.name + this.weight + this.conditionUsed + this.price + this.discount + this.category + this.shipmentPlans;
     }
 }

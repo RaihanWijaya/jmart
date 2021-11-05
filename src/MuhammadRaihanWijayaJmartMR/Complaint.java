@@ -4,28 +4,20 @@ import java.text.SimpleDateFormat;
 /**
  * Class for Complaint
  *
- * @author Raihan Wijaya
+ * @author Muhammad Raihan Wijaya
  * @version v1.0 in Modul 4
  */
-public class Complaint extends Recognizable implements FileParser
+public class Complaint extends Recognizable
 {
     public Date date;
     public String desc;
     
-    public Complaint(int id, String desc){
-        super(id);
+    public Complaint(String desc){
         this.desc = desc;
         this.date = new Date();
     }
-    
-    @Override
-    public boolean read(String content){
-        return false;
-    }
-    
+
     public String toString(){
-        SimpleDateFormat SDformat = new SimpleDateFormat("dd/MM/yyyy");
-        String format = SDformat.format(this.date);
-        return ("date=" + format + ", " + "desc=" + "'" + this.desc + "'");
+        return this.date + this.desc;
     }
 }
