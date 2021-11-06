@@ -3,9 +3,11 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import com.google.gson.*;
+import com.google.gson.reflect.TypeToken;
 
 /**
  * Class for Jmart
@@ -15,18 +17,14 @@ import com.google.gson.*;
  */
 public class Jmart
 {
-    /*Belum bener
     public static List<Product> read (String filepath) throws FileNotFoundException {
         Gson gson = new Gson();
-        try{
-            BufferedReader br = new BufferedReader(new FileReader(filepath));
-        }
-        catch(IOException e){
-            e.printStackTrace();
-        }
-        return null;
+        Type userListType = new TypeToken<ArrayList<Product>>() {
+        }.getType();
+        BufferedReader br = new BufferedReader(new FileReader(filepath));
+        List<Product> returnList = gson.fromJson(br, userListType);
+        return returnList;
     }
-    */
 
     public static List<Product> filterByCategory (List<Product>list, ProductCategory category){
         List<Product> tempHasil = new ArrayList<Product>();
@@ -42,10 +40,20 @@ public class Jmart
     public static List<Product> filterByPrice (List<Product>list, double minPrice, double maxPrice){
         List<Product> tempHasil = new ArrayList<Product>();
 
-        for(Product temp : list){
-            if(temp.price >= minPrice){
-                if(temp.price <= maxPrice){
-                    if(minPrice != 0.0 && maxPrice != 0.0){
+        for(Product temp : list) {
+            if (minPrice == 0.0) {
+                if (temp.price <= maxPrice) {
+                    tempHasil.add(temp);
+                }
+            }
+            else if (maxPrice == 0.0) {
+                if (temp.price >= minPrice) {
+                    tempHasil.add(temp);
+                }
+            }
+            else if (minPrice != 0.0 && maxPrice != 0.0){
+                if (temp.price >= minPrice) {
+                    if (temp.price <= maxPrice) {
                         tempHasil.add(temp);
                     }
                 }
@@ -62,16 +70,15 @@ public class Jmart
         System.out.println("payment id:" + new Payment(-1, -1, -1, null).id);
         System.out.println("payment id:" + new Payment(-1, -1, -1, null).id);
         System.out.println("payment id:" + new Payment(-1, -1, -1, null).id);
-        /*Belum bener
+
         try{
             List<Product> list = read("C:/Users/Raihan Wijaya/Documents/Kuliah Universitas Indonesia/Tugas Kuliah/Semester 3/Praktikum OOP/Tugas/Resource/CS6/randomProductList.json");
-            List<Product> filtered = filterByPrice(list, 0.0, 2000.0);
+            List<Product> filtered = filterByPrice(list, 1000.0, 20000.0);
             filtered.forEach(Product -> System.out.println(Product.price));
         }
         catch (Throwable t){
             t.printStackTrace();
         }
-        */
     }
 
     /*
