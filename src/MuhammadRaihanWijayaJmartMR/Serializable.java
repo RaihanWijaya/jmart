@@ -43,12 +43,11 @@ public abstract class Serializable implements Comparable<Serializable>
         return other.id == id;
     }
 
-    public <T> Integer getClosingId(Class<T> clazz){
-        return this.id;
+    public static <T> int getClosingId(Class<T> clazz){
+        return mapCounter.get(clazz);
     }
 
-    public <T> Integer setClosingId(Class<T> clazz, int id){
-        this.id = id;
-        return null;
+    public static <T> int setClosing(Class<T> clazz, int id){
+        return mapCounter.put(clazz, id);
     }
 }
