@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
  * @author Muhammad Raihan Wijaya
  * @version v1.0 in Modul 4
  */
-public class Account extends Recognizable
+public class Account extends Serializable
 {
     public static final String REGEX_EMAIL = "^\\w+([.&`~-]?\\w+)*@\\w+([.-]?\\w+)+$";
     public static final String REGEX_PASSWORD = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d][^-\\s]{8,}$";

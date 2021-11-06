@@ -5,7 +5,7 @@ package MuhammadRaihanWijayaJmartMR;
  * @author Muhammad Raihan Wijaya
  * @version v1.0 in Modul 4
  */
-public class Coupon extends Recognizable
+public class Coupon extends Serializable
 {
     public final int code;
     public final double cut, minimum;
@@ -22,16 +22,16 @@ public class Coupon extends Recognizable
         used = false;
     }
 
-    public double apply(Treasury treasury){
+    public double apply(double price, double discount){
         this.used = true;
         if (type == Type.DISCOUNT) {
-            return (Treasury.getAdjustedPrice(treasury.price, treasury.discount) * ((100 - cut) / 100));
+            return (Treasury.getAdjustedPrice(price, discount) * ((100 - cut) / 100));
         }
-        return (Treasury.getAdjustedPrice(treasury.price, treasury.discount) - cut);
+        return (Treasury.getAdjustedPrice(price, discount) - cut);
     }
     
-    public boolean canApply(Treasury treasury){
-        if (Treasury.getAdjustedPrice(treasury.price, treasury.discount) >= minimum && !used){
+    public boolean canApply(double price, double discount){
+        if (Treasury.getAdjustedPrice(price, discount) >= minimum && !used){
             return true;
         }
         else{

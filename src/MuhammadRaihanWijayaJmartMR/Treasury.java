@@ -1,6 +1,6 @@
 package MuhammadRaihanWijayaJmartMR;
 /**
- * Class for PriceTag
+ * Class for Treasury
  *
  * @author Muhammad Raihan Wijaya
  * @version v1.0 in Modul 4

@@ -5,7 +5,7 @@ package MuhammadRaihanWijayaJmartMR;
  * @author Muhammad Raihan Wijaya
  * @version v1.0 in Modul 4
  */
-public class Product extends Recognizable
+public class Product extends Serializable
 {
     public int accountId;
     public ProductCategory category;

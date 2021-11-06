@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * @author Muhammad Raihan Wijaya
  * @version v1.0 in Modul 4
  */
-public abstract class Invoice extends Recognizable
+public abstract class Invoice extends Serializable
 {
     public int buyerId;
     public int complaintId;

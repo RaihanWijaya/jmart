@@ -1,13 +1,13 @@
 package MuhammadRaihanWijayaJmartMR;
 import java.util.Date;
-import java.text.SimpleDateFormat;
+
 /**
  * Class for Complaint
  *
  * @author Muhammad Raihan Wijaya
  * @version v1.0 in Modul 4
  */
-public class Complaint extends Recognizable
+public class Complaint extends Serializable
 {
     public Date date;
     public String desc;

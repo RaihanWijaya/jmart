@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
  * @author Muhammad Raihan Wijaya
  * @version v1.0 in Modul 4
  */
-public class Store extends Recognizable
+public class Store
 {
     public static final String REGEX_NAME = "^[A-Z](?!.*(\\s)\\1).{4,20}$";
     public static final String REGEX_PHONE = "^(\\d{9,12})$";
