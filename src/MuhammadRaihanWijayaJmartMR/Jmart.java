@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 
@@ -17,13 +19,16 @@ import com.google.gson.reflect.TypeToken;
  */
 public class Jmart
 {
-    public static List<Product> read (String filepath) throws FileNotFoundException {
-        Gson gson = new Gson();
-        Type userListType = new TypeToken<ArrayList<Product>>() {
-        }.getType();
-        BufferedReader br = new BufferedReader(new FileReader(filepath));
-        List<Product> returnList = gson.fromJson(br, userListType);
-        return returnList;
+    public static List<Product> filterByAccountId (List<Product>list, int accountId, int page, int pageSize){
+        List<Product> tempHasil = new ArrayList<Product>();
+        Predicate<Product> tempPred = temp -> (temp.accountId == accountId);
+
+        for(Product temp : list){
+            if(temp.accountId == accountId){
+                tempHasil.add(temp);
+            }
+        }
+        return paginate(list, page, pageSize, tempPred);
     }
 
     public static List<Product> filterByCategory (List<Product>list, ProductCategory category){
@@ -35,6 +40,19 @@ public class Jmart
             }
         }
         return tempHasil;
+    }
+
+    public static List<Product> filterByName (List<Product> list, String search, int page, int pageSize){
+        List<Product> tempHasil = new ArrayList<Product>();
+        Predicate<Product> tempPred = tempName -> (tempName.name.toLowerCase().contains(search.toLowerCase()));
+
+        for(Product temp : list) {
+            String tempList = temp.name;
+            if (tempList.toLowerCase().contains(search.toLowerCase())) {
+                tempHasil.add(temp);
+            }
+        }
+        return paginate(list, page, pageSize, tempPred);
     }
 
     public static List<Product> filterByPrice (List<Product>list, double minPrice, double maxPrice){
@@ -79,6 +97,25 @@ public class Jmart
         catch (Throwable t){
             t.printStackTrace();
         }
+    }
+
+    private static List<Product> paginate (List<Product> list, int page, int pageSize, Predicate<Product> pred){
+        List<Product> tempHasil = new ArrayList<Product>();
+
+        if (pred.equals(true)){
+            for(int i = ((list.size() / pageSize) * page); i < ((list.size() / pageSize) * page) + pageSize; i++){
+                tempHasil.add(list.get(i));
+            }
+        }
+        return tempHasil;
+    }
+
+    public static List<Product> read (String filepath) throws FileNotFoundException {
+        Gson gson = new Gson();
+        Type userListType = new TypeToken<ArrayList<Product>>() {
+        }.getType();
+        BufferedReader br = new BufferedReader(new FileReader(filepath));
+        return gson.fromJson(br, userListType);
     }
 
     /*
