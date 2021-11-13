@@ -80,6 +80,19 @@ public class Jmart
         catch (Throwable t){
             t.printStackTrace();
         }
+
+        String filepath = "C:/Users/Raihan Wijaya/Documents/Kuliah Universitas Indonesia/Tugas Kuliah/Semester 3/Praktikum OOP/Tugas/Resource/CS7/Account.json";
+
+        try{
+            JsonTable<Account> tableAccount = new JsonTable<>(Account.class, filepath);
+            tableAccount.add(new Account("name","email","password", 0));
+            tableAccount.writeJson();
+
+            tableAccount = new JsonTable<>(Account.class,filepath);
+            tableAccount.forEach(account -> System.out.println(account.toString()));
+        }catch (Throwable t){
+            t.printStackTrace();
+        }
     }
 
     private static List<Product> paginate (List<Product> list, int page, int pageSize, Predicate<Product> pred){

@@ -236,7 +236,7 @@ public class Algorithm<T> {
 
     public static <T extends Comparable<? super T>> T min(T first, T second, Comparator<? super T> comparator) {
         T minimum;
-        if(comparator.compare(first, second) >= 0) {
+         if(comparator.compare(first, second) >= 0) {
             minimum = first;
         }
         else {
@@ -259,7 +259,6 @@ public class Algorithm<T> {
 
         return minimum;
     }
-
 
     public static <T extends Comparable<? super T>> T min(Iterable<T> iterable, Comparator<? super T> comparator) {
         final Iterator <T> each  = iterable.iterator();

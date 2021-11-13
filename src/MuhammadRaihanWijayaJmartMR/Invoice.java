@@ -34,7 +34,7 @@ public abstract class Invoice extends Serializable
         FINISHED,
         FAILED
     }
-    
+
     public static enum Rating{
         NONE, 
         BAD, 
