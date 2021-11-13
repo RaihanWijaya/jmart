@@ -20,15 +20,7 @@ import com.google.gson.reflect.TypeToken;
 public class Jmart
 {
     public static List<Product> filterByAccountId (List<Product>list, int accountId, int page, int pageSize){
-        List<Product> tempHasil = new ArrayList<Product>();
-        Predicate<Product> tempPred = temp -> (temp.accountId == accountId);
-
-        for(Product temp : list){
-            if(temp.accountId == accountId){
-                tempHasil.add(temp);
-            }
-        }
-        return paginate(list, page, pageSize, tempPred);
+        return paginate(list, page, pageSize, product -> product.accountId == accountId);
     }
 
     public static List<Product> filterByCategory (List<Product>list, ProductCategory category){
@@ -43,16 +35,7 @@ public class Jmart
     }
 
     public static List<Product> filterByName (List<Product> list, String search, int page, int pageSize){
-        List<Product> tempHasil = new ArrayList<Product>();
-        Predicate<Product> tempPred = tempName -> (tempName.name.toLowerCase().contains(search.toLowerCase()));
-
-        for(Product temp : list) {
-            String tempList = temp.name;
-            if (tempList.toLowerCase().contains(search.toLowerCase())) {
-                tempHasil.add(temp);
-            }
-        }
-        return paginate(list, page, pageSize, tempPred);
+        return paginate(list, page, pageSize, product -> product.name.toLowerCase().contains(search.toLowerCase()));
     }
 
     public static List<Product> filterByPrice (List<Product>list, double minPrice, double maxPrice){
@@ -117,28 +100,4 @@ public class Jmart
         BufferedReader br = new BufferedReader(new FileReader(filepath));
         return gson.fromJson(br, userListType);
     }
-
-    /*
-    class Country{
-        public String name;
-        public int population;
-        public List<String> listOfStates;
-    }
-
-    public static void main(String[] args){
-        String filepath = "C:/Users/Raihan Wijaya/Documents/Kuliah Universitas Indonesia/Tugas Kuliah/Semester 3/Praktikum OOP/Tugas/Case Study/jmart/city.json";
-        Gson gson = new Gson();
-        try{
-            BufferedReader br = new BufferedReader(new FileReader(filepath));
-            Country input = gson.fromJson(br, Country.class);
-            System.out.println("Name: " + input.name);
-            System.out.println("Population: " + input.population);
-            System.out.println("States: ");
-            input.listOfStates.forEach(state -> System.out.println(state));
-        }
-        catch(IOException e){
-            e.printStackTrace();
-        }
-    }
-     */
 }

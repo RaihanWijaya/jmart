@@ -12,17 +12,15 @@ public abstract class Invoice extends Serializable
     public int buyerId;
     public int complaintId;
     public Date date;
-    public ArrayList<Record> history = new ArrayList<Record>();
     public int productId;
     public Rating rating;
-    public Status status;
 
     protected Invoice(int buyerId, int productId){
         this.buyerId = buyerId;
         this. productId = productId;
-        this.date = new Date();
+        this.date = java.util.Calendar.getInstance().getTime();
         this.rating = Rating.NONE;
-        this.status = Status.WAITING_CONFIRMATION;
+        this.complaintId = -1;
     }
 
     public abstract double getTotalPay();
@@ -42,11 +40,5 @@ public abstract class Invoice extends Serializable
         BAD, 
         NEUTRAL, 
         GOOD
-    }
-    
-    public class Record{
-        public Status status;
-        public Date date;
-        public String message;
     }
 }
