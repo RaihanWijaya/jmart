@@ -2,7 +2,6 @@ package MuhammadRaihanWijayaJmartMR;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Class for Payment
@@ -12,7 +11,7 @@ import java.util.List;
  */
 public class Payment extends Invoice
 {
-    List<Record> history = new ArrayList<Record>();
+    ArrayList<Record> history = new ArrayList<Record>();
     public int productCount;
     public Shipment shipment;
 
@@ -23,8 +22,8 @@ public class Payment extends Invoice
         this.shipment = shipment;
     }
     
-    public double getTotalPay(){
-        return 0.0;
+    public double getTotalPay(Product product){
+        return product.price * product.discount;
     }
 
     public static class Record{

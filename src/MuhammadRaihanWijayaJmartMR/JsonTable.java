@@ -12,17 +12,17 @@ public class JsonTable<T> extends Vector
     public final String filepath;
     private static final Gson gson = new Gson();
 
-    public JsonTable(Class<T> clazz, String filepath) throws IOException{
+    public JsonTable(Class<T> clazz, String filepath) throws IOException {
         this.filepath = filepath;
 
         @SuppressWarnings("unchecked")
-        Class<T[]> array = (Class<T[]>) Array.newInstance(clazz,0).getClass();
+        Class<T[]> array = (Class<T[]>) Array.newInstance(clazz, 0).getClass();
 
-        T[] result = JsonTable.readJson(array,this.filepath);
-        Collections.addAll(this,result);
+        T[] result = JsonTable.readJson(array, this.filepath);
+        Collections.addAll(this, result);
     }
 
-    public static<T> T readJson(Class<T> clazz, String filepath) throws FileNotFoundException{
+    public static <T> T readJson(Class<T> clazz, String filepath) throws FileNotFoundException {
         T readerJson = null;
         try {
             final JsonReader readJson = new JsonReader(new FileReader(filepath));
@@ -37,9 +37,9 @@ public class JsonTable<T> extends Vector
         writeJson(this, this.filepath);
     }
 
-    public static void writeJson(Object object, String filepath) throws IOException{
-        final FileWriter write = new FileWriter(filepath);
-        write.write(gson.toJson(object));
-        write.close();
+    public static void writeJson(Object object, String filepath) throws IOException {
+        final FileWriter fileWriter = new FileWriter(filepath);
+        fileWriter.write(gson.toJson(object));
+        fileWriter.close();
     }
 }

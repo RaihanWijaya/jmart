@@ -1,15 +1,5 @@
 package MuhammadRaihanWijayaJmartMR;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-
-import com.google.gson.*;
-import com.google.gson.reflect.TypeToken;
+import com.google.gson.Gson;
 
 /**
  * Class for Jmart
@@ -19,98 +9,50 @@ import com.google.gson.reflect.TypeToken;
  */
 public class Jmart
 {
-    public static List<Product> filterByAccountId (List<Product>list, int accountId, int page, int pageSize){
-        return paginate(list, page, pageSize, product -> product.accountId == accountId);
-    }
+    public static long DELIVERED_LIMIT_MS = 100;
+    public static long ON_DELIVERY_LIMIT_MS = 100;
+    public static long ON_PROGRESS_LIMIT_MS = 100;
+    public static long WAITING_CONF_LIMIT_MS = 100;
 
-    public static List<Product> filterByCategory (List<Product>list, ProductCategory category){
-        List<Product> tempHasil = new ArrayList<Product>();
+    public static void main(String[] args) {
+        try {
+            JsonTable<Payment> table = new JsonTable<>(Payment.class,"C:/Users/Raihan Wijaya/Documents/Kuliah Universitas Indonesia/Tugas Kuliah/Semester 3/Praktikum OOP/Tugas/Case Study/jmart/randomPaymentList.json");
+            ObjectPoolThread<Payment> paymentPool = new ObjectPoolThread<Payment>("Thread-PP", Jmart::paymentTimekeeper);
 
-        for(Product temp : list){
-            if(temp.category == category){
-                tempHasil.add(temp);
-            }
+            paymentPool.start();
+            table.forEach(payment -> paymentPool.add((Payment) payment));
+            while (paymentPool.size() != 0);
+            paymentPool.exit();
+            while (paymentPool.isAlive());
+
+            System.out.println("Thread exit successfully");
+            Gson gson = new Gson();
+            table.forEach(payment -> {
+                String history = gson.toJson(payment);
+                System.out.println(history);
+            });
         }
-        return tempHasil;
-    }
-
-    public static List<Product> filterByName (List<Product> list, String search, int page, int pageSize){
-        return paginate(list, page, pageSize, product -> product.name.toLowerCase().contains(search.toLowerCase()));
-    }
-
-    public static List<Product> filterByPrice (List<Product>list, double minPrice, double maxPrice){
-        List<Product> tempHasil = new ArrayList<Product>();
-
-        for(Product temp : list) {
-            if (minPrice == 0.0) {
-                if (temp.price <= maxPrice) {
-                    tempHasil.add(temp);
-                }
-            }
-            else if (maxPrice == 0.0) {
-                if (temp.price >= minPrice) {
-                    tempHasil.add(temp);
-                }
-            }
-            else if (minPrice != 0.0 && maxPrice != 0.0){
-                if (temp.price >= minPrice) {
-                    if (temp.price <= maxPrice) {
-                        tempHasil.add(temp);
-                    }
-                }
-            }
-        }
-        return tempHasil;
-    }
-
-    public static void main (String[] args){
-        System.out.println("account id:" + new Account(null, null, null, -1).id);
-        System.out.println("account id:" + new Account(null, null, null, -1).id);
-        System.out.println("account id:" + new Account(null, null, null, -1).id);
-
-        System.out.println("payment id:" + new Payment(-1, -1, -1, null).id);
-        System.out.println("payment id:" + new Payment(-1, -1, -1, null).id);
-        System.out.println("payment id:" + new Payment(-1, -1, -1, null).id);
-
-        try{
-            List<Product> list = read("C:/Users/Raihan Wijaya/Documents/Kuliah Universitas Indonesia/Tugas Kuliah/Semester 3/Praktikum OOP/Tugas/Resource/CS6/randomProductList.json");
-            List<Product> filtered = filterByPrice(list, 1000.0, 20000.0);
-            filtered.forEach(Product -> System.out.println(Product.price));
-        }
-        catch (Throwable t){
-            t.printStackTrace();
-        }
-
-        String filepath = "C:/Users/Raihan Wijaya/Documents/Kuliah Universitas Indonesia/Tugas Kuliah/Semester 3/Praktikum OOP/Tugas/Resource/CS7/Account.json";
-
-        try{
-            JsonTable<Account> tableAccount = new JsonTable<>(Account.class, filepath);
-            tableAccount.add(new Account("name","email","password", 0));
-            tableAccount.writeJson();
-
-            tableAccount = new JsonTable<>(Account.class,filepath);
-            tableAccount.forEach(account -> System.out.println(account.toString()));
-        }catch (Throwable t){
+        catch (Throwable t) {
             t.printStackTrace();
         }
     }
 
-    private static List<Product> paginate (List<Product> list, int page, int pageSize, Predicate<Product> pred){
-        List<Product> tempHasil = new ArrayList<Product>();
-
-        if (pred.equals(true)){
-            for(int i = ((list.size() / pageSize) * page); i < ((list.size() / pageSize) * page) + pageSize; i++){
-                tempHasil.add(list.get(i));
-            }
+    public static boolean paymentTimekeeper(Payment payment) {
+        long startTime = System.currentTimeMillis();
+        if(payment.history.equals(Invoice.Status.WAITING_CONFIRMATION) && System.currentTimeMillis() - startTime > WAITING_CONF_LIMIT_MS) {
+            payment.history.add(new Payment.Record(Invoice.Status.FAILED, "FAILED"));
         }
-        return tempHasil;
-    }
-
-    public static List<Product> read (String filepath) throws FileNotFoundException {
-        Gson gson = new Gson();
-        Type userListType = new TypeToken<ArrayList<Product>>() {
-        }.getType();
-        BufferedReader br = new BufferedReader(new FileReader(filepath));
-        return gson.fromJson(br, userListType);
+        else if(payment.history.equals(Invoice.Status.ON_PROGRESS) && System.currentTimeMillis() - startTime > ON_PROGRESS_LIMIT_MS) {
+            payment.history.add(new Payment.Record(Invoice.Status.FAILED, "FAILED"));
+        }
+        else if(payment.history.equals(Invoice.Status.ON_DELIVERY) && System.currentTimeMillis() - startTime > ON_DELIVERY_LIMIT_MS) {
+            payment.history.add(new Payment.Record(Invoice.Status.ON_DELIVERY, "ON_DELIVERY"));
+            return true;
+        }
+        else if(payment.history.equals(Invoice.Status.FINISHED) && System.currentTimeMillis() - startTime > DELIVERED_LIMIT_MS) {
+            payment.history.add(new Payment.Record(Invoice.Status.FINISHED, "DELIVERED"));
+            return true;
+        }
+        return false;
     }
 }
