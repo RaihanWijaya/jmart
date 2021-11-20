@@ -1,4 +1,7 @@
 package com.MuhammadRaihanWijayaJmartMR;
+
+import com.MuhammadRaihanWijayaJmartMR.dbjson.Serializable;
+
 /**
  * Class for Coupon
  *

@@ -1,4 +1,5 @@
 package com.MuhammadRaihanWijayaJmartMR;
+import com.MuhammadRaihanWijayaJmartMR.dbjson.JsonTable;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.google.gson.*;
