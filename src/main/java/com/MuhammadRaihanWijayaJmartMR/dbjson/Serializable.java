@@ -47,7 +47,7 @@ public abstract class Serializable implements Comparable<Serializable>
         return mapCounter.get(clazz);
     }
 
-    public static <T> int setClosingId(Class<T> clazz, int id){
-        return mapCounter.put(clazz, id);
+    public static <T> void setClosingId(Class<T> clazz, int id){
+        mapCounter.put(clazz, id);
     }
 }

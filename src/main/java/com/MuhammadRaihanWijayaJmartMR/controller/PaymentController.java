@@ -1,14 +1,16 @@
 package com.MuhammadRaihanWijayaJmartMR.controller;
 
+import com.MuhammadRaihanWijayaJmartMR.Account;
 import com.MuhammadRaihanWijayaJmartMR.ObjectPoolThread;
 import com.MuhammadRaihanWijayaJmartMR.Payment;
+import com.MuhammadRaihanWijayaJmartMR.Product;
 import com.MuhammadRaihanWijayaJmartMR.dbjson.JsonAutowired;
 import com.MuhammadRaihanWijayaJmartMR.dbjson.JsonTable;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/payment")
-public class PaymentController implements BasicGetController {
+public class PaymentController implements BasicGetController<Payment> {
     public static final long DELIVERED_LIMIT_MS = 100;
     public static final long ON_DELIVERY_LIMIT_MS = 100;
     public static final long ON_PROGRESS_LIMIT_MS = 100;
@@ -32,6 +34,17 @@ public class PaymentController implements BasicGetController {
                     @RequestParam byte shipmnetPlan
             )
     {
+        /*
+        for (Account each1 : AccountController.accountTable){
+            if (each1.id == buyerId){
+                for(Product each2 : ProductController.productTable){
+                    if(each2.id == productId){
+
+                    }
+                }
+            }
+        }
+        */
         return null;
     }
 

@@ -4,13 +4,14 @@ import com.MuhammadRaihanWijayaJmartMR.Store;
 import com.MuhammadRaihanWijayaJmartMR.dbjson.JsonAutowired;
 import com.MuhammadRaihanWijayaJmartMR.dbjson.JsonTable;
 import org.springframework.web.bind.annotation.*;
-
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @RestController
 @RequestMapping("/account")
-public class AccountController implements BasicGetController
+public class AccountController implements BasicGetController<Account>
 {
     public static final String REGEX_EMAIL = "^\\w+([.&`~-]?\\w+)*@\\w+([.-]?\\w+)+$";
     public static final String REGEX_PASSWORD = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d][^-\\s]{8,}$";
@@ -28,15 +29,27 @@ public class AccountController implements BasicGetController
     }
 
     @PostMapping("/login")
-    @ResponseBody Account login
+    Account login
             (
                     @RequestParam String email,
                     @RequestParam String password
             )
     {
-        for (Account each : accountTable){
-            if(each.email.equals(email) && each.password.equals(password)){
-                return each;
+        for (Account data : accountTable){
+            try{
+                MessageDigest md = MessageDigest.getInstance("MD5");
+                md.update(password.getBytes());
+                byte[] bytes = md.digest();
+                StringBuilder sb = new StringBuilder();
+                for(int i = 0; i < bytes.length; i++){
+                    sb.append(Integer.toString((bytes[i] & 0xff) + 0x100,16).substring(1));
+                }
+                password = sb.toString();
+            }catch (NoSuchAlgorithmException e){
+                e.printStackTrace();
+            }
+            if(data.email.equals(email) && data.password.equals(password)){
+                return data;
             }
         }
         return null;
@@ -50,13 +63,26 @@ public class AccountController implements BasicGetController
                     @RequestParam String password
             )
     {
-        Matcher matchEmail = REGEX_PATTERN_EMAIL.matcher(email);
-        boolean hasilEmail = matchEmail.find();
-        Matcher matchPassword = REGEX_PATTERN_PASSWORD.matcher(email);
-        boolean hasilPassword = matchPassword.find();
+
+        boolean hasilEmail = REGEX_PATTERN_EMAIL.matcher(email).find();
+        boolean hasilPassword = REGEX_PATTERN_PASSWORD.matcher(password).find();
+        try{
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            md.update(password.getBytes());
+            byte[] bytes = md.digest();
+            StringBuilder sb = new StringBuilder();
+            for(int i = 0; i < bytes.length; i++){
+                sb.append(Integer.toString((bytes[i] & 0xff) + 0x100,16).substring(1));
+            }
+            password = sb.toString();
+        }catch (NoSuchAlgorithmException e){
+            e.printStackTrace();
+        }
         if(!name.isBlank() || hasilEmail || hasilPassword ||
                 accountTable.stream().anyMatch(account -> account.email.equals(email))){
-            return new Account(name, email, password, 0);
+            Account account =  new Account(name, email, password, 0);
+            accountTable.add(account);
+            return account;
         }
         return null;
     }

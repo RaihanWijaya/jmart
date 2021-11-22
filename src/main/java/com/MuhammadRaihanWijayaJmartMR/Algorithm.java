@@ -184,7 +184,7 @@ public class Algorithm<T> {
         T maximum = null;
         while(iterator.hasNext()) {
             if(comparator.compare(iterator.next(), maximum)>= 0) {
-
+                maximum = iterator.next();
             }
         }
         return maximum;
@@ -277,7 +277,7 @@ public class Algorithm<T> {
         T minimum = null;
         while(iterator.hasNext()) {
             if(comparator.compare(iterator.next(), minimum)>= 0) {
-
+                minimum = iterator.next();
             }
         }
         return minimum;
@@ -347,14 +347,14 @@ public class Algorithm<T> {
     }
 
     public static <T> List<T> paginate(T[] array, int page, int pageSize, Predicate<T> pred) {
-        int iteration = 0;
-        int occurences = 0;
-        int startingIdx = page * pageSize;
+        int iterator = 0;
+        int counter = 0;
+        int startId = page * pageSize;
         List<T> pageList = new ArrayList<>(pageSize);
 
-        for (; iteration < array.length && occurences < startingIdx; ++iteration) {
-            if (pred.predicate(array[iteration])) {
-                ++occurences;
+        for (; iterator < array.length && counter < startId; ++iterator) {
+            if (pred.predicate(array[iterator])) {
+                ++counter;
             }
         }
         for (int i = 0; i < array.length && pageList.size() < pageSize; ++i) {
@@ -366,46 +366,45 @@ public class Algorithm<T> {
     }
 
     public static <T> List<T> paginate(Iterable<T> iterable, int page, int pageSize, Predicate<T> pred) {
-        int iteration = 0;
-        int occurences = 0;
-        int startingIdx = page * pageSize;
+        int iterator = 0;
+        int counter = 0;
+        int startId = page * pageSize;
         List<T> pageList = new ArrayList<>(pageSize);
 
         List<T> array = new ArrayList<T>();
 
         iterable.forEach(array::add);
 
-        for (; iteration < array.size() && occurences < startingIdx; ++iteration) {
-            if (pred.predicate(array.get(iteration))) {
-                ++occurences;
+        for (; iterator < array.size() && counter < startId; ++iterator) {
+            if (pred.predicate(array.get(iterator))) {
+                ++counter;
             }
         }
         for (int i = 0; i < array.size() && pageList.size() < pageSize; ++i) {
-            if (pred.predicate(array.get(iteration))) {
-                pageList.add(array.get(iteration));
+            if (pred.predicate(array.get(iterator))) {
+                pageList.add(array.get(iterator));
             }
         }
         return pageList;
     }
-
     public static <T> List<T> paginate(Iterator<T> iterator, int page, int pageSize, Predicate<T> pred) {
-        int iteration = 0;
-        int occurences = 0;
-        int startingIdx = page * pageSize;
+        int iterate = 0;
+        int counter = 0;
+        int startId = page * pageSize;
         List<T> pageList = new ArrayList<>(pageSize);
 
         List<T> array = new ArrayList<T>();
 
         iterator.forEachRemaining(array::add);
 
-        for (; iteration < array.size() && occurences < startingIdx; ++iteration) {
-            if (pred.predicate(array.get(iteration))) {
-                ++occurences;
+        for (; iterate < array.size() && counter < startId; ++iterate) {
+            if (pred.predicate(array.get(iterate))) {
+                ++counter;
             }
         }
         for (int i = 0; i < array.size() && pageList.size() < pageSize; ++i) {
-            if (pred.predicate(array.get(iteration))) {
-                pageList.add(array.get(iteration));
+            if (pred.predicate(array.get(iterate))) {
+                pageList.add(array.get(iterate));
             }
         }
         return pageList;
