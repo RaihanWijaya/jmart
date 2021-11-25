@@ -16,6 +16,6 @@ public class Jmart
     public static void main(String[] args) {
         JsonDBEngine.Run(Jmart.class);
         SpringApplication.run(Jmart.class, args);
-        Runtime.getRuntime().addShutdownHook(new Thread(() -> JsonDBEngine.join()));
+        Runtime.getRuntime().addShutdownHook(new Thread(JsonDBEngine::join));
     }
 }

@@ -11,9 +11,10 @@ import java.util.Date;
  */
 public class Payment extends Invoice
 {
-    ArrayList<Record> history = new ArrayList<Record>();
+
     public int productCount;
     public Shipment shipment;
+    public ArrayList<Record> history = new ArrayList<Record>();
 
     public Payment(int buyerId, int productId, int productCount, Shipment shipment){
         super(buyerId, productId);
@@ -21,9 +22,10 @@ public class Payment extends Invoice
         this.productId = productId;
         this.shipment = shipment;
     }
-    
+
+    @Override
     public double getTotalPay(Product product){
-        return product.price * product.discount;
+        return product.price * product.discount * productCount;
     }
 
     public static class Record{

@@ -2,7 +2,6 @@ package com.MuhammadRaihanWijayaJmartMR;
 import com.MuhammadRaihanWijayaJmartMR.dbjson.Serializable;
 
 import java.util.Date;
-import java.util.ArrayList;
 /**
  * Class for Invoice
  *
