@@ -30,14 +30,14 @@ public class PaymentController implements BasicGetController<Payment> {
                     @RequestParam int productId,
                     @RequestParam int productCount,
                     @RequestParam String shipmentAddress,
-                    @RequestParam byte shipmnetPlan
+                    @RequestParam byte shipmentPlan
             )
     {
         for (Account eachAccount : AccountController.accountTable){
             if (eachAccount.id == buyerId){
                 for(Product eachProduct : ProductController.productTable){
                     if(eachProduct.id == productId){
-                        Payment payment = new Payment(buyerId, productId, productCount, new Shipment(shipmentAddress, 0, shipmnetPlan, null));
+                        Payment payment = new Payment(buyerId, productId, productCount, new Shipment(shipmentAddress, 0, shipmentPlan, null));
                         if(eachAccount.balance >= payment.getTotalPay(eachProduct)){
                             eachAccount.balance -= payment.getTotalPay(eachProduct);
                             paymentTable.add(payment);
