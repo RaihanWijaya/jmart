@@ -65,4 +65,14 @@ public class CouponControler implements BasicGetController<Coupon>
     {
         return Algorithm.paginate(couponTable, page, pageSize, pred-> !pred.isUsed());
     }
+
+    @Override
+    public Coupon getById(int id) {
+        return BasicGetController.super.getById(id);
+    }
+
+    @Override
+    public List getPage(int page, int pageSize) {
+        return BasicGetController.super.getPage(page, pageSize);
+    }
 }

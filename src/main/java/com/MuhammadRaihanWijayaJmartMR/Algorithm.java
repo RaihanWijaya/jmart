@@ -1,8 +1,9 @@
 package com.MuhammadRaihanWijayaJmartMR;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
-public class Algorithm<T> {
+public class Algorithm {
     private Algorithm() {
 
     }
@@ -66,32 +67,57 @@ public class Algorithm<T> {
     }
 
     public static <T> T find(T[] array, T value) {
-        final Iterator<T> var = Arrays.stream(array).iterator();
-        return find(var, value);
+        for(T i : array){
+            if(i == value){
+                return i;
+            }
+        }
+        return null;
     }
 
     public static <T> T find(Iterable<T> iterable, T value) {
-        final Iterator <T> var = iterable.iterator();
-        return find(var, value);
+        for(T i : iterable){
+            if(i == value){
+                return i;
+            }
+        }
+        return null;
     }
 
     public static <T> T find(Iterator<T> iterator, T value) {
-        final Predicate <T> var = value::equals;
-        return find(iterator, var);
+        while (iterator.hasNext()){
+            if(iterator.next() == value){
+                return iterator.next();
+            }
+        }
+        return null;
     }
 
     public static <T> T find(T[] array, Predicate<T> pred) {
-        final Iterator<T> var = Arrays.stream(array).iterator();
-        return find(var, pred);
+        for(T i : array){
+            if(pred.predicate(i)){
+                return i;
+            }
+        }
+        return null;
     }
 
     public static <T> T find(Iterable<T> iterable, Predicate<T> pred) {
-        final Iterator <T> var = iterable.iterator();
-        return find(var, pred);
+        for(T i : iterable){
+            if(pred.predicate(i)){
+                return i;
+            }
+        }
+        return null;
     }
 
     public static <T> T find(Iterator<T> iterator, Predicate<T> pred) {
-        return find(iterator, pred);
+        while (iterator.hasNext()){
+            if(pred.predicate(iterator.next())){
+                return iterator.next();
+            }
+        }
+        return null;
     }
 
     public static <T extends Comparable<? super T>> T max(T first, T  second) {
@@ -236,7 +262,7 @@ public class Algorithm<T> {
 
     public static <T extends Comparable<? super T>> T min(T first, T second, Comparator<? super T> comparator) {
         T minimum;
-         if(comparator.compare(first, second) >= 0) {
+        if(comparator.compare(first, second) >= 0) {
             minimum = first;
         }
         else {
@@ -259,6 +285,7 @@ public class Algorithm<T> {
 
         return minimum;
     }
+
 
     public static <T extends Comparable<? super T>> T min(Iterable<T> iterable, Comparator<? super T> comparator) {
         final Iterator <T> each  = iterable.iterator();
@@ -346,65 +373,47 @@ public class Algorithm<T> {
         return list;
     }
 
-    public static <T> List<T> paginate(T[] array, int page, int pageSize, Predicate<T> pred) {
-        int iterator = 0;
-        int counter = 0;
-        int startId = page * pageSize;
-        List<T> pageList = new ArrayList<>(pageSize);
-
-        for (; iterator < array.length && counter < startId; ++iterator) {
-            if (pred.predicate(array[iterator])) {
-                ++counter;
-            }
-        }
-        for (int i = 0; i < array.length && pageList.size() < pageSize; ++i) {
-            if (pred.predicate(array[i])) {
-                pageList.add(array[i]);
-            }
-        }
-        return pageList;
+    public static <T> List<T> paginate(T[] array, int page, int pageSize, Predicate<T> pred){
+        return Arrays.stream(array).filter(pred::predicate).skip(pageSize*page).limit(pageSize).collect(Collectors.toList());
     }
 
-    public static <T> List<T> paginate(Iterable<T> iterable, int page, int pageSize, Predicate<T> pred) {
-        int iterator = 0;
-        int counter = 0;
-        int startId = page * pageSize;
-        List<T> pageList = new ArrayList<>(pageSize);
-
-        List<T> array = new ArrayList<T>();
-
-        iterable.forEach(array::add);
-
-        for (; iterator < array.size() && counter < startId; ++iterator) {
-            if (pred.predicate(array.get(iterator))) {
-                ++counter;
+    public static <T> List<T> paginate(Iterable<T> iterable, int page, int pageSize, Predicate<T> pred){
+        List<T> list = new ArrayList<T>();
+        int counter = 0, counterPrint = 0;
+        int size = pageSize * page;
+        for (T each : iterable){
+            if (counter < size && pred.predicate(each)){
+                counter++;
+                continue;
+            }
+            if (counterPrint < pageSize && pred.predicate(each)){
+                list.add(each);
+                counterPrint++;
+            }else{
+                break;
             }
         }
-        for (int i = 0; i < array.size() && pageList.size() < pageSize; ++i) {
-            if (pred.predicate(array.get(iterator))) {
-                pageList.add(array.get(iterator));
-            }
-        }
-        return pageList;
+        return list;
     }
+
     public static <T> List<T> paginate(Iterator<T> iterator, int page, int pageSize, Predicate<T> pred) {
-        int iterate = 0;
-        int counter = 0;
-        int startId = page * pageSize;
+        int iteration = 0;
+        int occurences = 0;
+        int startingIdx = page * pageSize;
         List<T> pageList = new ArrayList<>(pageSize);
 
         List<T> array = new ArrayList<T>();
 
         iterator.forEachRemaining(array::add);
 
-        for (; iterate < array.size() && counter < startId; ++iterate) {
-            if (pred.predicate(array.get(iterate))) {
-                ++counter;
+        for (; iteration < array.size() && occurences < startingIdx; ++iteration) {
+            if (pred.predicate(array.get(iteration))) {
+                ++occurences;
             }
         }
         for (int i = 0; i < array.size() && pageList.size() < pageSize; ++i) {
-            if (pred.predicate(array.get(iterate))) {
-                pageList.add(array.get(iterate));
+            if (pred.predicate(array.get(iteration))) {
+                pageList.add(array.get(iteration));
             }
         }
         return pageList;

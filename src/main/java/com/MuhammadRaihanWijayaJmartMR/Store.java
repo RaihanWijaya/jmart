@@ -42,10 +42,6 @@ public class Store
         boolean matchName = matcherName.find();
         boolean hasilName = matchName ? true : false;
 
-        if (hasilPhone == true && hasilName == true){
-            return true;
-        }
-        else
-            return false;
+        return hasilPhone && hasilName;
     }
 }
