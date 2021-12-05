@@ -33,7 +33,6 @@ public class ProductController implements BasicGetController<Product>
     }
 
     @PostMapping("/create")
-    @ResponseBody
     Product create
             (
                     @RequestParam int accountId,
@@ -46,8 +45,8 @@ public class ProductController implements BasicGetController<Product>
                     @RequestParam byte shipmentPlans
             )
     {
-        for(Product each : productTable) {
-            if (each.accountId == accountId){
+        for(Account each : AccountController.accountTable) {
+            if (each.id == accountId && each.store != null){
                 Product product =  new Product(accountId, name, weight, conditionUsed, price, discount, category, shipmentPlans);
                 productTable.add(product);
                 return product;
