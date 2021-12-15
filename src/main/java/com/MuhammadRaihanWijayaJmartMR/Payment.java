@@ -9,6 +9,7 @@ import java.util.Date;
  * @author Muhammad Raihan Wijaya
  * @version v1.0 in Modul 4
  */
+
 public class Payment extends Invoice
 {
 
@@ -25,7 +26,7 @@ public class Payment extends Invoice
 
     @Override
     public double getTotalPay(Product product){
-        return product.price * product.discount * productCount;
+        return product.price * (product.discount/100) * productCount;
     }
 
     public static class Record{

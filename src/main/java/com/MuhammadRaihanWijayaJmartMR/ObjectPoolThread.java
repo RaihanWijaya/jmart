@@ -1,5 +1,10 @@
 package com.MuhammadRaihanWijayaJmartMR;
 
+/**
+ * The class ObjectPoolThread<T> extends Thread
+ * @author Raihan Wijaya
+ */
+
 import java.util.Vector;
 import java.util.function.Function;
 

@@ -1,10 +1,12 @@
 package com.MuhammadRaihanWijayaJmartMR;
+
 /**
  * Class for Treasury
  *
  * @author Muhammad Raihan Wijaya
  * @version v1.0 in Modul 4
  */
+
 public class Treasury
 {
     public static final double COMMISSION_MULTIPLIER = 0.05;

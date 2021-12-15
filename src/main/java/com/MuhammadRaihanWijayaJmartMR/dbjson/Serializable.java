@@ -8,6 +8,7 @@ import java.util.HashMap;
  * @author Muhammad Raihan Wijaya
  * @version v1.0 in Modul 4
  */
+
 public abstract class Serializable implements Comparable<Serializable>
 {
     public int id;

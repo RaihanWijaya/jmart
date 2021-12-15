@@ -1,13 +1,16 @@
 package com.MuhammadRaihanWijayaJmartMR;
+
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+
 /**
  * Class for Shipment
  *
  * @author Muhammad Raihan Wijaya
  * @version v1.0 in Modul 4
  */
+
 public class Shipment
 {
     public static SimpleDateFormat ESTIMATION_FORMAT = new SimpleDateFormat("E MMMM dd yyyy");

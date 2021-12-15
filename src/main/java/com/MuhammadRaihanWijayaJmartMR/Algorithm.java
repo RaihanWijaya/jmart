@@ -1,5 +1,11 @@
 package com.MuhammadRaihanWijayaJmartMR;
 
+/**
+ * The class Algorithm
+ * @author Raihan Wijaya
+ * @description Digunakan untuk sebagai algoritma dari backend program
+ */
+
 import java.util.*;
 import java.util.stream.Collectors;
 

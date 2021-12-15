@@ -1,13 +1,16 @@
 package com.MuhammadRaihanWijayaJmartMR;
+
 import com.MuhammadRaihanWijayaJmartMR.dbjson.Serializable;
 
 import java.util.Date;
+
 /**
  * Class for Invoice
  *
  * @author Muhammad Raihan Wijaya
  * @version v1.0 in Modul 4
  */
+
 public abstract class Invoice extends Serializable
 {
     public int buyerId;

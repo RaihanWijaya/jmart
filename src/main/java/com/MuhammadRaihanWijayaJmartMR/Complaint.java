@@ -1,4 +1,5 @@
 package com.MuhammadRaihanWijayaJmartMR;
+
 import com.MuhammadRaihanWijayaJmartMR.dbjson.Serializable;
 
 import java.util.Date;
@@ -9,6 +10,7 @@ import java.util.Date;
  * @author Muhammad Raihan Wijaya
  * @version v1.0 in Modul 4
  */
+
 public class Complaint extends Serializable
 {
     public Date date;

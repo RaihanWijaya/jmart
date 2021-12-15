@@ -1,10 +1,12 @@
 package com.MuhammadRaihanWijayaJmartMR;
+
 /**
  * Class for Product Rating
  * 
  * @author Muhammad Raihan Wijaya
  * @version v1.0 in Modul 4
  */
+
 public class ProductRating
 {
     private static long total;

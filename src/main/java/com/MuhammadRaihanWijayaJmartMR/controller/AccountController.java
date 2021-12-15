@@ -1,4 +1,11 @@
 package com.MuhammadRaihanWijayaJmartMR.controller;
+
+/**
+ * The class AccountController implements BasicGetController<Account>
+ * @author Raihan Wijaya
+ * @description Digunakan untuk mengatur akun seperti login, register, topUp dan registerStore
+ */
+
 import com.MuhammadRaihanWijayaJmartMR.Account;
 import com.MuhammadRaihanWijayaJmartMR.Store;
 import com.MuhammadRaihanWijayaJmartMR.dbjson.JsonAutowired;
@@ -82,7 +89,7 @@ public class AccountController implements BasicGetController<Account>
     }
 
     @PostMapping("/{id}/registerStore")
-    Store registerStore
+    Store register
             (
                     @RequestParam int id,
                     @RequestParam String name,
@@ -90,10 +97,10 @@ public class AccountController implements BasicGetController<Account>
                     @RequestParam String phoneNumber
             )
     {
-        for(Account each : accountTable){
-            if (each.store == null && each.id == id){
-                each.store = new Store(name,address,phoneNumber,0);
-                return each.store;
+        for (Account data : accountTable) {
+            if (data.store == null && data.id == id) {
+                data.store = new Store(name, address, phoneNumber, 0);
+                return data.store;
             }
         }
         return null;

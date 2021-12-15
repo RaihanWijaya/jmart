@@ -8,6 +8,7 @@ import com.MuhammadRaihanWijayaJmartMR.dbjson.Serializable;
  * @author Muhammad Raihan Wijaya
  * @version v1.0 in Modul 4
  */
+
 public class Coupon extends Serializable
 {
     private static boolean used;

@@ -1,12 +1,15 @@
 package com.MuhammadRaihanWijayaJmartMR;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 /**
  * Class for Store
  *
  * @author Muhammad Raihan Wijaya
  * @version v1.0 in Modul 4
  */
+
 public class Store
 {
     public static final String REGEX_NAME = "^[A-Z](?!.*(\\s)\\1).{4,20}$";

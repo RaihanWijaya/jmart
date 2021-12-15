@@ -1,5 +1,11 @@
 package com.MuhammadRaihanWijayaJmartMR.controller;
 
+/**
+ * The class PaymentController implements BasicGetController<Payment>
+ * @author Raihan Wijaya
+ * @description Digunakan untuk sebagai controller dari payment, seperti create, accept, cancel dan submit
+ */
+
 import com.MuhammadRaihanWijayaJmartMR.*;
 import com.MuhammadRaihanWijayaJmartMR.Payment;
 import com.MuhammadRaihanWijayaJmartMR.Invoice;
@@ -33,21 +39,23 @@ public class PaymentController implements BasicGetController<Payment> {
                     @RequestParam byte shipmentPlan
             )
     {
-        for (Account eachAccount : AccountController.accountTable){
-            if (eachAccount.id == buyerId){
-                for(Product eachProduct : ProductController.productTable){
-                    if(eachProduct.id == productId){
-                        Payment payment = new Payment(buyerId, productId, productCount, new Shipment(shipmentAddress, 0, shipmentPlan, null));
-                        if(eachAccount.balance >= payment.getTotalPay(eachProduct)){
-                            eachAccount.balance -= payment.getTotalPay(eachProduct);
-                            paymentTable.add(payment);
-                            return payment;
-                        }
-                    }
-                }
+        System.out.println("Mulai beli");
+        Product product1 = Algorithm.<Product>find(ProductController.productTable,e -> e.id == productId);
+        Account account1 = Algorithm.<Account>find(AccountController.accountTable,e -> e.id == buyerId);
+        if(product1 != null && account1 != null ){
+            System.out.println("Account dan produk ditemukan");
+            Payment payment = new Payment(buyerId,productId,productCount,new Shipment(shipmentAddress,0,shipmentPlan,account1.name));
+            if(payment.getTotalPay(product1) > account1.balance){
+                System.out.println("Balance tidak mencukupi");
+                return null;
+            }else {
+                account1.balance -= payment.getTotalPay(product1);
+                paymentTable.add(payment);
+                return payment;
             }
+        }else {
+            return null;
         }
-        return null;
     }
 
     @PostMapping(" /{id}/accept ")

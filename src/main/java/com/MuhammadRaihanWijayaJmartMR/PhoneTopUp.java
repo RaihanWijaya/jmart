@@ -1,5 +1,11 @@
 package com.MuhammadRaihanWijayaJmartMR;
 
+/**
+ * The class Pair<T, U>
+ * @author Raihan Wijaya
+ * @description Backend dari phoneTopUp
+ */
+
 public class PhoneTopUp extends Invoice
 {
     public String phoneNumber;

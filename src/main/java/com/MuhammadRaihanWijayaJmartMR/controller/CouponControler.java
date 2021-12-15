@@ -1,12 +1,17 @@
 package com.MuhammadRaihanWijayaJmartMR.controller;
 
+/**
+ * The class CouponControler implements BasicGetController<Coupon>
+ * @author Raihan Wijaya
+ * @description Digunakan untuk sebagai controller dari coupon
+ */
+
 import com.MuhammadRaihanWijayaJmartMR.Algorithm;
 import com.MuhammadRaihanWijayaJmartMR.Coupon;
 import com.MuhammadRaihanWijayaJmartMR.dbjson.JsonAutowired;
 import com.MuhammadRaihanWijayaJmartMR.dbjson.JsonTable;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController

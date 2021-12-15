@@ -1,14 +1,18 @@
 package com.MuhammadRaihanWijayaJmartMR;
+
 import com.MuhammadRaihanWijayaJmartMR.dbjson.Serializable;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 /**
  * Class for Account
  *
  * @author Muhammad Raihan Wijaya
  * @version v1.0 in Modul 4
+ * @description Backend dari akun
  */
+
 public class Account extends Serializable
 {
     public static final String REGEX_EMAIL = "^\\w+([.&`~-]?\\w+)*@\\w+([.-]?\\w+)+$";
