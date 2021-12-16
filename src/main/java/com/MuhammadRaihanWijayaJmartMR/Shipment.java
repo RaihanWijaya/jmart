@@ -21,7 +21,7 @@ public class Shipment
     public static final Plan KARGO = new Plan ((byte)(1 << 4)); //0001 0000
     public String address;
     public int cost;
-    public byte plan;
+    private byte plan;
     public String receipt;
     
     public Shipment(String address, int cost, byte plan, String receipt){

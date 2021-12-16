@@ -39,17 +39,16 @@ public class PaymentController implements BasicGetController<Payment> {
                     @RequestParam byte shipmentPlan
             )
     {
-        System.out.println("Mulai beli");
-        Product product1 = Algorithm.<Product>find(ProductController.productTable,e -> e.id == productId);
-        Account account1 = Algorithm.<Account>find(AccountController.accountTable,e -> e.id == buyerId);
-        if(product1 != null && account1 != null ){
-            System.out.println("Account dan produk ditemukan");
-            Payment payment = new Payment(buyerId,productId,productCount,new Shipment(shipmentAddress,0,shipmentPlan,account1.name));
-            if(payment.getTotalPay(product1) > account1.balance){
-                System.out.println("Balance tidak mencukupi");
+        Product selectedProduct = Algorithm.<Product>find(ProductController.productTable,e -> e.id == productId);
+        Account selectedAccount = Algorithm.<Account>find(AccountController.accountTable,e -> e.id == buyerId);
+
+        if(selectedProduct != null && selectedAccount != null ){
+            Payment payment = new Payment(buyerId,productId,productCount,new Shipment(shipmentAddress,0,shipmentPlan,selectedAccount.name));
+            if(payment.getTotalPay(selectedProduct) > selectedAccount.balance){
                 return null;
             }else {
-                account1.balance -= payment.getTotalPay(product1);
+                selectedAccount.balance -= payment.getTotalPay(selectedProduct);
+                payment.history.add(new Payment.Record(Invoice.Status.WAITING_CONFIRMATION, ""));
                 paymentTable.add(payment);
                 return payment;
             }
@@ -122,7 +121,7 @@ public class PaymentController implements BasicGetController<Payment> {
         } else if (record.status.equals(Invoice.Status.ON_PROGRESS) && (elapsed > ON_PROGRESS_LIMIT_MS)) {
             record.status = Invoice.Status.FAILED;
             return true;
-        } else if (record.status.equals(Invoice.Status.ON_DELIVERY) && (elapsed > ON_PROGRESS_LIMIT_MS)) {
+        } else if (record.status.equals(Invoice.Status.ON_DELIVERY) && (elapsed > ON_DELIVERY_LIMIT_MS)) {
             record.status = Invoice.Status.FINISHED;
             return true;
         } else if (record.status.equals(Invoice.Status.FINISHED) && (elapsed > DELIVERED_LIMIT_MS)) {

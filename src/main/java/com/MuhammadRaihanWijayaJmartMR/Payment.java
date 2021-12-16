@@ -12,7 +12,6 @@ import java.util.Date;
 
 public class Payment extends Invoice
 {
-
     public int productCount;
     public Shipment shipment;
     public ArrayList<Record> history = new ArrayList<Record>();
@@ -26,7 +25,7 @@ public class Payment extends Invoice
 
     @Override
     public double getTotalPay(Product product){
-        return product.price * (product.discount/100) * productCount;
+        return (product.price - (product.price * (product.discount/100))) * productCount;
     }
 
     public static class Record{
@@ -35,7 +34,7 @@ public class Payment extends Invoice
         public String message;
 
         public Record(Status status, String message){
-            this.status = status;
+            this.status = Status.WAITING_CONFIRMATION;
             this.message = message;
             this.date = java.util.Calendar.getInstance().getTime();
         }

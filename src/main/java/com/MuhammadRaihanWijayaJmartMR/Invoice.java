@@ -21,7 +21,7 @@ public abstract class Invoice extends Serializable
 
     protected Invoice(int buyerId, int productId){
         this.buyerId = buyerId;
-        this. productId = productId;
+        this.productId = productId;
         this.date = java.util.Calendar.getInstance().getTime();
         this.rating = Rating.NONE;
         this.complaintId = -1;
