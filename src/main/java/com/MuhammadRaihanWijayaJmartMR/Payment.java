@@ -34,7 +34,7 @@ public class Payment extends Invoice
         public String message;
 
         public Record(Status status, String message){
-            this.status = Status.WAITING_CONFIRMATION;
+            this.status = status;
             this.message = message;
             this.date = java.util.Calendar.getInstance().getTime();
         }

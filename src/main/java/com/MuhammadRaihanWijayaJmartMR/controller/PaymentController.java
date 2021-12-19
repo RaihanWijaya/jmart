@@ -57,7 +57,7 @@ public class PaymentController implements BasicGetController<Payment> {
         }
     }
 
-    @PostMapping(" /{id}/accept ")
+    @PostMapping("/{id}/accept")
     @ResponseBody boolean accept
             (
                     @RequestParam int id
@@ -74,7 +74,7 @@ public class PaymentController implements BasicGetController<Payment> {
         return false;
     }
 
-    @PostMapping(" /{id}/cancel ")
+    @PostMapping("/{id}/cancel")
     @ResponseBody boolean cancel
             (
                     @RequestParam int id
@@ -91,7 +91,7 @@ public class PaymentController implements BasicGetController<Payment> {
         return false;
     }
 
-    @PostMapping(" /{id}/submit ")
+    @PostMapping("/{id}/submit")
     @ResponseBody boolean submit
             (
                     @RequestParam int id,
